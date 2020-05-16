@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta name="generator" content="pandoc">
+  
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="/style.css" type="text/css">
+          <title>CS462 Formal Languages and Parsing</title>
+</head>
+<body>
+
+<h1 id="cs462-formal-languages-and-parsing"><a href="https://www.student.cs.uwaterloo.ca/~cs462/">CS462 Formal Languages and Parsing</a></h1>          <a href="index.html">Back to UWaterloo</a>
+<div id="TOC">
+
+<ul>
+<li><a href="#combinatorics-on-word-definitions">Combinatorics on Word: Definitions</a></li>
+<li><a href="#finite-automata-and-regular-languages">Finite Automata and Regular Languages</a></li>
+<li><a href="#automata-graphs-and-boolean-matrices">3.8 Automata, graphs and boolean matrices</a></li>
+<li><a href="#myhill-nerode-theorem">3.9 Myhill-Nerode theorem</a></li>
+<li><a href="#minimization-of-finite-automata">3.10 Minimization of finite automata</a></li>
+<li><a href="#partial-order">3.12 Partial Order</a></li>
+<li><a href="#context-free-grammars">4 Context-free grammars</a></li>
+</ul>
+</div>
+<h3 id="combinatorics-on-word-definitions">Combinatorics on Word: Definitions</h3>
+<ul>
+<li>A <strong>primative</strong> <code>x</code> and <strong>power</strong> <code>w</code> form the word <code>w = x^k</code> for integer <code>k</code>
+</li>
+<li>P<sub>2</sub> means the set of all primatives over the alphabet of length 2: {0,1}</li>
+<li>
+<code>x Ш y</code> means shuffle, as in shuffling a deck (interleave)</li>
+<li>lexicographic order is defined for same length strings</li>
+<li>
+<strong>radix order</strong> sorts first by length then lexicographical</li>
+<li>z is <strong>purely periodic</strong> if z = x^omega for some finite x</li>
+<li>z is <strong>ultimately periodic</strong> if the suffix is purely periodic</li>
+<li>x and y are <strong>conjugates</strong> if x is a cyclic shift of y</li>
+<li>x is a <strong>border</strong> of y if x is not empty, x != y, x is prefix and suffix of y "entaglement"</li>
+<li>Lyndon-Schutzenberger 1st theorem, the "alfalfa" theorem</li>
+<li>can not avoid squares over a finite alphabet</li>
+<li>a <strong>morphism</strong> is a map from one alphabet to another, preserving concatenation</li>
+<li>if every subword of an infinite word appears at least twice, then every subword appears infinitely many times</li>
+<li>if every subword appears infinitely many times, the infinite word is <strong>recurrent</strong>
+</li>
+<li>thue-morse sequence is recurrent because any subword is from position i to j, and for the binary representation of <code>j</code>, you can always find the same subword ending at <code>11j</code><ul>
+<li>another way to think about this is the complementary construction. complement of complement gets you the original string back at a later position</li>
+<li><img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Morse-Thue_sequence.gif" alt="thue-morse"></li>
+</ul>
+</li>
+</ul>
+<p>Proof tricks:</p>
+<ul><li>pigeon hole principle is useful for showing eventual repetition in infinite strings</li></ul>
+<h3 id="finite-automata-and-regular-languages">Finite Automata and Regular Languages</h3>
+<ul>
+<li>
+<strong>moore vs mealy machines</strong> are representations of a DFA for computation, resulting in some output<ul>
+<li>moore outputs different values at each state. there exists a mealy machine with the same # of states</li>
+<li>mealy outputs values at each transition. there exists a moore machine with |Q| |Δ| states</li>
+</ul>
+</li>
+<li>Quotient operator on languages: <code>L1 / L2</code> is defined as <code>{x in Sigma * where y in L2 and xy in L1 }</code><ul><li>we can define <code>prefix(L) = L / Sigma*</code>
+</li></ul>
+</li>
+<li>Concatenation of languages: <code>L1 L2</code> is <code>{xy where x in L1, y in L2 }</code>
+</li>
+<li>Theorem: for language <code>L</code> and regular language <code>R</code>, then <code>R / L</code> is regular<ul><li>idea: start with a DFA for <code>R</code>, modify its final (accepting) states</li></ul>
+</li>
+<li>example: remove trailing zeroes while preserving regularity. <code>(L / '0'*) n {epsilon u sigma* u sigma - {0}</code>
+</li>
+<li>Δ<sup> * </sup> is the set of all languages</li>
+<li>
+<strong>substitution</strong> maps words to languages. It preserves concatenation.<ul><li>"substitution by regular languages" means regularity is preserved during substitution.</li></ul>
+</li>
+<li>Theorem: substitution preserves regularity. Prove by induction on the regular expression operators.</li>
+<li>
+<strong>inverse morphism</strong> on a language L is, given a morphism, the set of all words that when the morphism is applied to them, they result in a word in L</li>
+<li>
+<strong>transducer</strong> is a generalization of the mealy machine which transforms input to a new output, which has finite states, nondeterministic transitions, and each transition takes some input and produce output of possibly a different alphabet</li>
+</ul>
+<p>Proof tricks:</p>
+<ul>
+<li>for induction, always construct the problem recursively. Then make sure during the induction step, we apply it to pieces recursively.</li>
+<li>start with reprentations of an object (regular language represented by DFA, NFA, etc) and modify it to reach an answer</li>
+</ul>
+<h3 id="automata-graphs-and-boolean-matrices">3.8 Automata, graphs and boolean matrices</h3>
+<p>A transition in a NFA can be represented using an <strong>incidence matrix</strong>: a boolean matrix where for a given input character <code>a in Sigma, Ma[i][j] = 1</code> if there is a transition from state <code>i</code> to state <code>j</code> on character <code>a</code>, or <code>delta(qi, a) = qj</code>. (we use <code>AND</code> instead of multiply, <code>OR</code> instead of addition).</p>
+<p>If you multiply matrices, we end up "following paths" along the NFA. <code>Ma x Mb</code> gives us the incidence matrix for word <code>w = ab</code>.</p>
+<p>We learned from algos cs240 that there are more effective implementations of matrix multiplication than the naive <code>O(n^3)</code>. This gives us a more efficient computation for NFA simulation.</p>
+<p>There are a finite number of possible matrices, even after infinite operations on them since each state can only be 0 or 1.</p>
+<p><strong>Proof trick:</strong> construct a second DFA from the original, using tuples of matrices as the states (this works because there are finitely many possible incidence matrices). Define the final states using a sort of "query" on all states that satisfy some property, enabling traversal from the initial state (row 0) to final states in the original DFA.</p>
+<h3 id="myhill-nerode-theorem">3.9 Myhill-Nerode theorem</h3>
+<p>The following are equivalent:</p>
+<ol>
+<li>
+<code>L</code> is regular</li>
+<li>
+<code>L</code> can be written as the union some of the equivalence classes (indistinguishable) of <code>E</code>, where <code>E</code> is a right-invariant (<code>xRy =&gt; xzRyz</code> <code>x,y in S, forall z in S</code>) equivalence relation with finite index<ul>
+<li>an equivalence relation <code>R</code> partitions a set into disjoint subsets of "equal" things (equivalence class)<ul><li>
+<code>R1</code> is a <strong>refinement</strong> of <code>R2</code> if <code>R1 subset of R2</code>
+</li></ul>
+</li>
+<li>index is the number of classes</li>
+</ul>
+</li>
+<li>
+<code>R</code><sub>L</sub> is of finite index.<ul>
+<li>
+<strong>Myhill-Nerode equivalence relation</strong> is a right-invariant relation <code>R</code><sub>L</sub>, s.t. if <code>xz in</code>language L iff <code>yz in L</code>
+</li>
+<li>if L is the union of any right-invarant equivalence relation E's equivalence classes, then E is a refinement of <code>R</code><sub>L</sub>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="minimization-of-finite-automata">3.10 Minimization of finite automata</h3>
+<p>Myhill-Nerode theorem allows minimal DFAs to be constructed from the Myhill-Nerode equivalence relation</p>
+<p>Naively, enumerate all pairs of states. "Mark" all pairs that are immediately distinguishable (one's a final state, the other isn't). Run for n iterations, marking new pairs along the way. Any unmarked states after n iterations yields the equivalence classes.</p>
+<h3 id="partial-order">3.12 Partial Order</h3>
+<ul>
+<li>subword (contiguous, <code>x S y</code>) is one natural partial ordering on strings, and subsequence (<code>a | b</code>) is another</li>
+<li>if <code>R</code> is a partial ordering, then if <code>a R b</code> or <code>b R a</code>, then <code>a</code> and <code>b</code> are comparable (otherwise incomparable)</li>
+<li>
+<strong>antichain</strong> is a set of pairwise incomparable elements<ul>
+<li>subword can have infinite antichains (for ex. <code>a b^n a</code>)</li>
+<li>subsequence has no infinite antichains<ul><li>proof using contradiction on minimality, using division-free subsequences</li></ul>
+</li>
+</ul>
+</li>
+<li>a <strong>minimal element</strong> has nothing less than or equal to it except itself</li>
+<li>the set of minimal elements is finite (though hard to find in some cases, like powers of 2 in base 10)</li>
+</ul>
+<h2 id="context-free-grammars">4 Context-free grammars</h2>
+<ul><li>recall pushdown-automata. <code>∂(q,a,A)</code> is of the form <code>(p, 𝛾)</code> where A is the current top of stack, and <code>𝛾</code> is a string that replaces <code>A</code>. Input accepted if at final state or stack is empty, where stack starts with some unique Z0.</li></ul>
+    <div id="footer">
+      Notes by <a href="https://github.com/kevintpeng">Kevin Peng</a>, Google intern.<br>
+      Formerly Riot Games, Bloomberg, Apple &amp; Shopify.<br>
+      Connect with me on <a href="https://www.linkedin.com/in/kevintpeng/">LinkedIn</a>.
+    </div>
+</body>
+</html>
