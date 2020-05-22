@@ -47,7 +47,7 @@ jobs: # a collection of steps
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - add_ssh_keys:
           fingerprints:
-            - "de:27:cb:00:81:f4:8f:f8:a5:f0:ab:53:50:91:22:6d"
+            - "41:7d:a3:ef:0f:39:99:44:2e:ea:5a:4b:df:7a:ca:8c"
       - run:
           name: Deployment script
           command: ./deploy.sh
