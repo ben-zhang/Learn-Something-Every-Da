@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta name="generator" content="pandoc">
+  
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="/style.css" type="text/css">
+          <title>Setup</title>
+</head>
+<body>
+
+<h1 id="setup">Setup</h1>          <a href="index.html">Back to setup-notes</a>
+<p>A few notes regarding challenges I encountered while forking this repo from @kevintpeng</p>
+<ol>
+<li>Change the git repo you're pushing to in deploy.sh</li>
+<li>Change your name in deploy.sh</li>
+<li>You don't have to add a User key. A read-write deploy key works just fine<ol><li>You can use <code>ssh-keygen -m PEM -t rsa -C "your_email@example.com"</code>
+</li></ol>
+</li>
+<li>Leave the hostname blank or "github.com" for your read-write deploy key</li>
+<li>Add the appropriate keys in the add-ssh-keys lines in config.yml</li>
+<li>Delete my notes, replace them with your own.</li>
+</ol>
+<p>Side note: <code>shift + ctrl + v</code> will previous this as markdown.</p>
+    <div id="footer">
+      Notes by <a href="https://github.com/ben-zhang">Ben Zhang</a>, Google intern.<br>
+      Connect with me on <a href="https://www.linkedin.com/in/benzhang/">LinkedIn</a>.
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta name="generator" content="pandoc">
+  
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="/style.css" type="text/css">
+          <title>Optimization For Deep Learning</title>
+</head>
+<body>
+
+<h1 id="optimization-for-deep-learning">Optimization For Deep Learning</h1>          <a href="index.html">Back to math/deep-learning-book</a>
+<div id="TOC">
+
+<ul><li>
+<a href="#basic-algorithms-for-dl-optimization">8.3 Basic Algorithms For DL Optimization</a><ul>
+<li><a href="#stochastic-gradient-descent">Stochastic Gradient Descent</a></li>
+<li><a href="#parameter-initialization">Parameter Initialization</a></li>
+<li><a href="#adaptive-learning-rates">Adaptive Learning Rates</a></li>
+</ul>
+</li></ul>
+</div>
+<h2 id="basic-algorithms-for-dl-optimization">8.3 Basic Algorithms For DL Optimization</h2>
+<h3 id="stochastic-gradient-descent">Stochastic Gradient Descent</h3>
+<p>We can use SGD to follow the gradients of randomly selected minibatches downhill.</p>
+<p>The learning rate of SGD must be decreased over time, so it differs from one iteration to the next. The SGD gradient estimator introduces a source of noise</p>
+<p><img src="C:%5CUsers%5CBenzh%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200519165915383.png" alt="image-20200519165915383"></p>
+<p>Review: Concept of Momentum</p>
+<p>We can use <strong>momentum</strong> in conjunction with SGD. While SGD considers only the current gradient, momentum-based methods consider past gradients as well, in order to</p>
+<h3 id="parameter-initialization">Parameter Initialization</h3>
+<hr>
+<p><strong>Nesterov Momentum</strong>: Compute momentum before computing gradient. We use the alpha term to determine something or other.</p>
+<h3 id="adaptive-learning-rates">Adaptive Learning Rates</h3>
+<p>The learning rate of an algorithm is a hyperparameter.</p>
+    <div id="footer">
+      Notes by <a href="https://github.com/ben-zhang">Ben Zhang</a>, Google intern.<br>
+      Connect with me on <a href="https://www.linkedin.com/in/benzhang/">LinkedIn</a>.
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta name="generator" content="pandoc">
+  
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="/style.css" type="text/css">
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+          <title>Eigenvalue Problems</title>
+</head>
+<body>
+
+<h1 id="eigenvalue-problems">Eigenvalue Problems</h1>          <a href="index.html">Back to math/linear-algebra</a>
+<div id="TOC">
+
+<ul><li><a href="#qr-iteration">QR Iteration</a></li></ul>
+</div>
+<h2 id="qr-iteration">QR Iteration</h2>
+<p>Using this method, we aim to find <em>more than one</em> eigenvector/eigenvalue pair at the same time.</p>
+<p><strong>Definition:</strong> Two matrices A and B are <strong>similar</strong> if <span class="math display">\[B = X^{-1}AX\]</span> for some non-singular <span class="math display">\[X\]</span>.</p>
+<p><strong>Definition</strong>: If <span class="math display">\[X \in \mathbb{R}^{nxn}\]</span> is nonsingular, then <span class="math display">\[A -&gt; X^{-1}AX\]</span> is called a <strong>similarity transformation</strong> of A.</p>
+<p><strong>Theorem:</strong> If <span class="math display">\[A\]</span> and <span class="math display">\[B\]</span> are similar, they have the same characteristic polynomial, and hence the same eigenvalues.</p>
+<p><em>Proof: Exercise for the reader (check Wikipedia, it was too much to Latex.)</em></p>
+<p>For the <strong>QR Iteration</strong>, we apply a series of similarity transformations to <span class="math display">\[A\]</span> to converge on a diagonal matrix. The diagonal of a diagonal matrix is its eigenvalues.</p>
+<p>Like the name suggests, we use the QR factorization of A to achieve this. The following is a key property of the algorithm:</p>
+<p>Given <span class="math display">\[A^{(k-1)}\]</span> with factors <span class="math display">\[Q^k\]</span> and <span class="math display">\[R^k\]</span>, we have <span class="math display">\[R^k = (Q^k)^TA^{k-1}\]</span>. Hence, we have</p>
+<p><span class="math display">\[ A^k \equiv R^kQ^k = (Q^k)^TA^{k-1}Q^k\]</span></p>
+<p>We thus have that <span class="math display">\[A^k\]</span> and <span class="math display">\[A^{(k-1)}\]</span> are similar. The QR Iteration repeats the process until it achieves the desired result.</p>
+    <div id="footer">
+      Notes by <a href="https://github.com/ben-zhang">Ben Zhang</a>, Google intern.<br>
+      Connect with me on <a href="https://www.linkedin.com/in/benzhang/">LinkedIn</a>.
+    </div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta name="generator" content="pandoc">
+  
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="/style.css" type="text/css">
+          <title>Fill</title>
+</head>
+<body>
+
+<h1 id="fill">Fill</h1>          <a href="index.html">Back to math/linear-algebra</a>
+<div id="TOC">
+
+<ul><li><a href="#culthill-mckee">Culthill-Mckee</a></li></ul>
+</div>
+<p><strong>Fill</strong> occurs when matrix entries that are originally zero change to a non-zero value during the execution of an algorithm. This can be problematic when dealing with sparse matrices. When computing a factorization (ex: Cholesky, LU), we wish for the resulting factorization to be similarly sparse to the original matrix.</p>
+<p>One example of a matrix that displays significant fill-in is the arrow matrix:</p>
+<p><strong>arrow matrix here</strong> <strong>arrow matrix LU here</strong></p>
+<p>To reduce fill, we can use <strong>matrix reorderings</strong>. By switching around rows and columns, we can reduce the <strong>envelope</strong> of a matrix. The <strong>envelope</strong> is the region in which fill can occur.</p>
+<p><strong>envelope example here</strong></p>
+<h2 id="culthill-mckee">Culthill-Mckee</h2>
+<p>We can use the Culthill-Mckee algorithm to produce a reordering of a graph. Such an ordering depends upon a graph's <strong>level sets</strong>, a partitioning of the graph based upon distance from a starting node. Level sets are dependent upon which node is the starting node.</p>
+    <div id="footer">
+      Notes by <a href="https://github.com/ben-zhang">Ben Zhang</a>, Google intern.<br>
+      Connect with me on <a href="https://www.linkedin.com/in/benzhang/">LinkedIn</a>.
+    </div>
+</body>
+</html>
